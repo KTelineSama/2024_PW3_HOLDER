@@ -14,5 +14,14 @@ const E= new Parking("Parking E", 3.1, 70, cristobal.id,{latitude:28.48718070983
 const F= new Parking("Parking F", 2.4,60, newcastle.id,{latitude:54.9738474,longitude:-1.6131572});
 const G= new Parking("Parking G", 3.2, 90,newcastle.id,{latitude:54.9738474,longitude:-1.6131572});
 
+aixFR.addParking(A.id);
+spezia.addParking(B.id);
+spezia.addParking(C.id);
+aixALL.addParking(D.id);
+cristobal.addParking(E.id);
+newcastle.addParking(F.id);
+newcastle.addParking(G.id);
+
+
 export const cities:City[]=[aixFR,aixALL,spezia,cristobal,newcastle];
 export const parkings:Parking[]=[A,B,C,D,E,F,G];

@@ -1,16 +1,19 @@
-import { Hono } from 'hono'
-import { cities, parkings } from './data/staticDatabase'
-import {getHome} from './controllers/HomeController'
-import { getParkings } from './controllers/ReadAllCitiesController'
-import {serveStatic} from 'hono/bun'
-console.log(parkings);
+import { Hono } from "hono";
+import { cities, parkings } from "./data/staticDatabase";
+import { getHome } from "./controllers/HomeController";
+import { getCities, getCity } from "./controllers/CitiesController";
+import { getParkings, getParking } from "./controllers/ParkingsController";
 
-const app = new Hono()
+import { serveStatic } from "hono/bun";
 
-app.get('/',(c)=>getHome(c))
-app.get('/cities', (c) => getParkings(c, parkings))
-app.get('/parkings', (c) => c.text('GET /parkings'))
+const app = new Hono();
 
-app.use('/static/*', serveStatic({ root: './' }))
+app.get("/", (c) => getHome(c));
+app.get("/cities", (c) => getCities(c, cities));
+app.get("/city/:slug", (c) => getCity(c, cities, c.req.param("slug")));
+app.get("/parkings", (c) => getParkings(c, parkings));
+app.get("/parkings/:id", (c) => getParking(c, parkings, c.req.param("id")));
 
-export default app
+app.use("/static/*", serveStatic({ root: "./" }));
+
+export default app;

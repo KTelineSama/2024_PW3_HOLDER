@@ -12,7 +12,7 @@ export class City {
   id: number;
   name: string;
   slug: string;
-  parkingIds: number[];
+  parkingIds: string[];
   country: string;
   localisation: GPS;
 
@@ -23,6 +23,10 @@ export class City {
     this.parkingIds = [];
     this.country = country;
     this.localisation = location;
+  }
+
+  addParking(parkingId: string) {
+    this.parkingIds.push(parkingId);
   }
 }
 
