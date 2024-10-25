@@ -1,19 +1,29 @@
 import { Hono } from "hono";
-import { cities, parkings } from "./data/staticDatabase";
-import { getHome } from "./controllers/HomeController";
-import { getCities, getCity } from "./controllers/CitiesController";
-import { getParkings, getParking } from "./controllers/ParkingsController";
+import HomeController from "./controllers/HomeController";
+import {
+  CityController,
+  CitiesController,
+} from "./controllers/CitiesController";
+import {
+  ParkingsController,
+  ParkingController,
+} from "./controllers/ParkingsController";
+import { trimTrailingSlash } from "hono/trailing-slash";
+import { html } from "hono/html";
+import { generateErrorView } from "./views/shared/ErrorView";
 
 import { serveStatic } from "hono/bun";
 
 const app = new Hono();
-
-app.get("/", (c) => getHome(c));
-app.get("/cities", (c) => getCities(c, cities));
-app.get("/city/:slug", (c) => getCity(c, cities, c.req.param("slug")));
-app.get("/parkings", (c) => getParkings(c, parkings));
-app.get("/parkings/:id", (c) => getParking(c, parkings, c.req.param("id")));
-
+app.onError((err, c) => {
+  return c.html(html`${generateErrorView(err)}`);
+});
+app.use(trimTrailingSlash());
+app.get("/", ...HomeController);
+app.get("/cities", ...CitiesController);
+app.get("/cities/:slug", ...CityController);
+app.get("/parkings", ...ParkingsController);
+app.get("/parkings/:id", ...ParkingController);
 app.use("/static/*", serveStatic({ root: "./" }));
 
 export default app;

@@ -1,16 +1,23 @@
 import { html } from "hono/html";
-import { Parking } from "../models/City";
+import { parkings } from "../data/staticDatabase";
 import { generateParkingsView } from "../views/parkings/ParkingsView";
 import { generateParkingView } from "../views/parkings/ParkingView";
+import { HTTPException } from "hono/http-exception";
+import { createFactory } from "hono/factory";
 
-export function getParkings(c: any, parkings: Parking[]) {
+const factory = createFactory();
+
+const ParkingsController = factory.createHandlers(async (c: any) => {
   return c.html(html`${generateParkingsView(parkings)}`);
-}
+});
 
-export function getParking(c: any, parkings: Parking[], id: string) {
+const ParkingController = factory.createHandlers(async (c: any) => {
+  const id: string = c.req.param("id");
   const parking = parkings.find((p) => p.id === id);
   if (!parking) {
-    return c.html(html`<h1>404 - Parking not found</h1>`);
+    throw new HTTPException(404, { message: "Parking non trouvé" });
   }
   return c.html(html`${generateParkingView(parking)}`);
-}
+});
+
+export { ParkingsController, ParkingController };

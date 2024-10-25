@@ -7,7 +7,7 @@ export const generateCitiesView = (cities: City[]) => {
       <ul>
         {cities.map((city) => (
           <li>
-            <a href={`/city/${city.slug}`}>{city.name}</a>
+            <a href={`/cities/${city.slug}`}>{city.name}</a>
             <ul>Parkings de la ville:
               {city.parkingIds.map((parking) => (
                 <li>

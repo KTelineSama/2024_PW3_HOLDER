@@ -1,4 +1,3 @@
-import { html } from "hono/html";
 type Props = {
   children?: any;
   pageTitle: String;
@@ -17,6 +16,10 @@ export function Layout({ children, pageTitle }: Props) {
         <title>{pageTitle}</title>
       </head>
       <link
+        href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+        rel="stylesheet"
+      />
+      <link
         rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic"
       />
@@ -29,8 +32,8 @@ export function Layout({ children, pageTitle }: Props) {
         href="https://cdnjs.cloudflare.com/ajax/libs/milligram/1.4.1/milligram.css"
       />
       <body>
-        <h1>Welcome to EuroPark!</h1>
-        <div>
+        <h1 class="">Welcome to EuroPark!</h1>
+        <div id="logo">
           <img
             src="../static/parking.png"
             alt="Image Parking"
@@ -38,11 +41,15 @@ export function Layout({ children, pageTitle }: Props) {
             height="250px"
           />
         </div>
-        <div id="links">
-          <a href="/cities">Cities</a>
+        <div id="links" class="flex m-4">
+          <a href="/cities" class="pr-4">
+            Cities
+          </a>
           <a href="/parkings">Parkings</a>
         </div>
-        {children}
+        <div id="content" class="p-8 flex">
+          {children}
+        </div>
       </body>
     </html>
   );

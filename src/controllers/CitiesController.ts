@@ -1,19 +1,23 @@
 import { html } from "hono/html";
-import { City } from "../models/City";
+import { cities } from "../data/staticDatabase";
 import { generateCitiesView } from "../views/city/CitiesView";
 import { generateCityView } from "../views/city/CityView";
+import { HTTPException } from "hono/http-exception";
+import { createFactory } from "hono/factory";
 
-export const getCities = (c: any, cities: City[]) => {
+const factory = createFactory();
+
+const CitiesController = factory.createHandlers(async (c: any) => {
   return c.html(html`${generateCitiesView(cities)}`);
-};
+});
 
-export const getCity = (c: any, cities: City[], slug: string) => {
-  console.log(slug);
-  
+const CityController = factory.createHandlers(async (c: any) => {
+  const slug: string = c.req.param("slug");
   const city = cities.find((c) => c.slug === slug);
-  console.log('on y est');
   if (!city) {
-    return c.html(html`<h1>404 - City not founsdfsdsdfd</h1>`);
+    throw new HTTPException(404, { message: "Ville non trouvée" });
   }
   return c.html(html`${generateCityView(city)}`);
-};
+});
+
+export { CitiesController, CityController };
