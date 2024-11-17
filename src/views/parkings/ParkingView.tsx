@@ -5,7 +5,8 @@ export function generateParkingView(parking: Parking) {
   return (
     <Layout pageTitle={`${parking.name}`}>
       <div>
-        <h1>{parking.name}, actuellement {parking.opened?"ouvert":"fermé"}</h1>
+        <h1>{parking.name}</h1>
+          <p>Ce parkign est actuellement {parking.opened?"ouvert":"fermé"}</p>
         <p>avec {parking.numberOfSpots} places disponibles</p>
       </div>
     </Layout>

@@ -4,9 +4,9 @@ import { Layout } from "../shared/Layout";
 export function generateParkingsView(parkings: Parking[]) {
   return (
     <Layout pageTitle="Parkings">
-      <ul>
+      <ul class="flex">
         {parkings.map((parking) => (
-          <li>
+          <li class="p-4">
             <a href={`/parkings/${parking.id}`}>{parking.name}</a>
           </li>
         ))}

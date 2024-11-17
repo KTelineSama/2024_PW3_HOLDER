@@ -4,9 +4,9 @@ import { Layout } from "../shared/Layout";
 export const generateCitiesView = (cities: City[]) => {
   return (
     <Layout pageTitle="Cities">
-      <ul>
+      <ul class="flex">
         {cities.map((city) => (
-          <li>
+          <li class="p-4">
             <a href={`/cities/${city.slug}`}>{city.name}</a>
             <ul>Parkings de la ville:
               {city.parkingIds.map((parking) => (

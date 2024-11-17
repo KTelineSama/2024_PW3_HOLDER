@@ -16,13 +16,13 @@ export class City {
   country: string;
   localisation: GPS;
 
-  constructor(name: string, country: string, location: GPS) {
+  constructor(name: string, country: string, localisation: GPS) {
     this.id = generateRandomNumberId();
     this.name = name;
     this.slug = toSlug(name);
     this.parkingIds = [];
     this.country = country;
-    this.localisation = location;
+    this.localisation = localisation;
   }
 
   addParking(parkingId: string) {

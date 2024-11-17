@@ -11,6 +11,13 @@ export const generateCityView = (city: City) => {
           Localisation: {city.localisation.latitude},{" "}
           {city.localisation.longitude}
         </p>
+        <ul>Parkings de la ville:
+              {city.parkingIds.map((parking) => (
+                <li>
+                  <a href={`/parkings/${parking}`}>{parking}</a>
+                </li>
+              ))}
+            </ul>
       </div>
     </Layout>
   );

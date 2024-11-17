@@ -32,7 +32,7 @@ export function Layout({ children, pageTitle }: Props) {
         href="https://cdnjs.cloudflare.com/ajax/libs/milligram/1.4.1/milligram.css"
       />
       <body>
-        <h1 class="">Welcome to EuroPark!</h1>
+        <h1>Welcome to EuroPark!</h1>
         <div id="logo">
           <img
             src="../static/parking.png"

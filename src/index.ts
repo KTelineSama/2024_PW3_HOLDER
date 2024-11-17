@@ -13,7 +13,8 @@ import { html } from "hono/html";
 import { generateErrorView } from "./views/shared/ErrorView";
 
 import { serveStatic } from "hono/bun";
-
+import { initDB } from "./data/sqliteData";
+initDB();
 const app = new Hono();
 app.onError((err, c) => {
   return c.html(html`${generateErrorView(err)}`);
